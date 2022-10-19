@@ -25,9 +25,9 @@ const alertController = {
           refreshToken: REFRESH_TOKEN,
           accessToken,
         },
-//        tls: {
-//          rejectUnauthorized: false,
-//        },
+        tls: {
+          rejectUnauthorized: false,
+        },
       });
       let htmlContent = `
       <!DOCTYPE html>
