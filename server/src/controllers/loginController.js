@@ -159,12 +159,17 @@ const loginController = {
     const { id } = req.params; // saco el id
     const modification = req.body;
     //console.log(modification);
-    const user = await models.User.update(modification, {
-      where: {
-        id: id,
-      },
-    });
-    res.json(user);
+    try {
+      const data = await User.findByPk(id)
+      const user = await User.update(modification, {
+        where: {
+          id: id,
+        },
+      });
+     return res.json(data);
+    } catch (error) {
+     console.log(error) 
+    };
   },
   putUser: async (req, res, next) => {
     const errors = validationResult(req);
