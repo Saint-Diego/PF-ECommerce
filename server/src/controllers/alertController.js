@@ -78,7 +78,7 @@ const alertController = {
       </html>
       `;
       const mailDetails = {
-        from: "'Don Quijote' <layne39@ethereal.email>",
+        from: "'Don Quijote' <sigl.system@gmail.com>",
         to: emails,
         subject,
         html: htmlContent,
