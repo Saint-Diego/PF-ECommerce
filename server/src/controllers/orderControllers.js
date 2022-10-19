@@ -107,7 +107,7 @@ const orderControllers = {
         console.log(det);
       });
       
-      return res.status(200).json(true);
+      res.status(200).json(true);
       
       if (payment.status === "succeeded") {
         await axios.post("https://pf-ecommerce-production-3652.up.railway.app/alert/email", {
