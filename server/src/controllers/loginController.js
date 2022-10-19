@@ -76,7 +76,7 @@ const loginController = {
               `
             },
           });
-        },
+        };
 
         return res.status(200).json({
           status: 1,
