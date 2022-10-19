@@ -9,17 +9,12 @@ const alertController = {
 
     try {
       const transporter = nodemailer.createTransport({
-        //service: "gmail",
-        host: "smtp.cftpucv.cl.com",
+        host: 'smtp.ethereal.email',
         port: 587,
-        secure: false,
         auth: {
-          user: "fuentes.rodrigo@cftpucv.cl",
-          pass: "abcd1234",
-        },
-        //tls: {
-       //   rejectUnauthorized: false,
-       // },
+            user: 'layne39@ethereal.email',
+            pass: 'Msefb1jpPkVEwmcu7X'
+        }
       });
       
       let htmlContent = `
@@ -68,7 +63,7 @@ const alertController = {
       </html>
       `;
       const mailDetails = {
-        from: "'Don Quijote' <fuentes.rodrigo@cftpucv.cl>",
+        from: "'Don Quijote' <layne39@ethereal.email>",
         to: emails,
         subject,
         html: htmlContent,
