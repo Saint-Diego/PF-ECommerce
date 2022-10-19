@@ -10,7 +10,7 @@ const alertController = {
     try {
       const transporter = nodemailer.createTransport({
         //service: "gmail",
-        host: "smtp.cftpucv.cl",
+        host: "smtp.cftpucv.cl.com",
         port: 587,
         secure: false,
         auth: {
