@@ -3,7 +3,7 @@ const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const cors = require("cors");
+//const cors = require("cors");
 const dotenv = require("dotenv");
 const logger = require("morgan");
 
@@ -22,7 +22,7 @@ const alertRoutes = require('./src/routes/alertRoutes');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
-app.use(cors({ origin: "https://don-quijote.vercel.app" }));
+//app.use(cors({ origin: "https://don-quijote.vercel.app" }));
 app.use(cookieParser());
 app.use(logger("dev"));
 
