@@ -108,7 +108,7 @@ const orderControllers = {
       });
 
       if (payment.status === "succeeded") {
-        await axios.post("http://localhost:3001/alert/email", {
+        await axios.post("https://pf-ecommerce-production-3652.up.railway.app/alert/email", {
           emails: email,
           subject: `Orden ID:${id} confirmada`,
           content: {
