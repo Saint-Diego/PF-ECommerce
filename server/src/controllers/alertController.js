@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 const { google } = require("googleapis");
-const HttpError = require("../errors/http-error");
+const HttpError = require("./src/errors/http-error");
 const { CLIENT_ID, CLIENT_SECRET, REFRESH_TOKEN, REDIRECT_URI } = process.env;
 
 const alertController = {
@@ -25,9 +25,9 @@ const alertController = {
           refreshToken: REFRESH_TOKEN,
           accessToken,
         },
-        tls: {
-          rejectUnauthorized: false,
-        },
+//        tls: {
+//          rejectUnauthorized: false,
+//        },
       });
       let htmlContent = `
       <!DOCTYPE html>
