@@ -61,7 +61,7 @@ const loginController = {
         };
 
         if (userCreated) {
-          await axios.post("http://localhost:3001/alert/email", {
+          await axios.post("https://pf-ecommerce-production-3652.up.railway.app/alert/email", {
             emails: email,
             subject: "Registro exitoso",
             content: {
@@ -72,7 +72,7 @@ const loginController = {
               }, le informamos que su cuenta ha sido creada satisfactoriamente. Lo invitamos a que visite nuestra página y mire las opciones de libros que tenemos disponibles.</p>
               `,
               footer: `
-              <a href="http://frontend.pfecommerce.ddns.net/" target="blanck">Ir a la página</a>
+              <a href="https://don-quijote.vercel.app/" target="blanck">Ir a la página</a>
               `
             },
           });
@@ -186,7 +186,7 @@ const loginController = {
     });
 
     if (change) {
-      await axios.post("http://localhost:3001/alert/email", {
+      await axios.post("https://pf-ecommerce-production-3652.up.railway.app/alert/email", {
         emails: user.email,
         subject: "Actualización exitosa",
         content: {
@@ -197,7 +197,7 @@ const loginController = {
           }, le informamos que su cuenta fue actualizada correctamente. Lo invitamos a que se dirija a nuestra página para que continúe con el proceso de inicio de sesión y mire las opciones de libros que tenemos disponibles.</p>
           `,
           footer: `
-          <a href="http://frontend.pfecommerce.ddns.net/login" target="blanck">Iniciar sesión</a>
+          <a href="https://don-quijote.vercel.app/login" target="blanck">Iniciar sesión</a>
           `
         },
       });
