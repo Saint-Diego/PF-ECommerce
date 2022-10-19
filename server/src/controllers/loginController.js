@@ -187,7 +187,7 @@ const loginController = {
 
     if (change) {
       await axios.post("https://pf-ecommerce-production-3652.up.railway.app/alert/email", {
-        emails: user.email,
+        emails: change.email,
         subject: "Actualización exitosa",
         content: {
           body: `
