@@ -106,7 +106,9 @@ const orderControllers = {
         });
         console.log(det);
       });
-
+      
+      return res.status(200).json(true);
+      
       if (payment.status === "succeeded") {
         await axios.post("https://pf-ecommerce-production-3652.up.railway.app/alert/email", {
           emails: email,
@@ -119,11 +121,9 @@ const orderControllers = {
           `},
         });
       };
-
-      res.status(200).json(true);
     } catch (error) {
       console.log(error);
-      res.status(400).json({ error });
+      return res.status(400).json({ error });
     }
   },
   getOrders: async (req, res) => {
