@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt");
 app.set("port", process.env.PORT || 3001);
 //Syncing all the models at once.
 conn.sync({ force: false }).then(async () => {
-  cosnt userAdmin = await User.findOne({ where: { email: "grupo08pf@gmail.com" } });
+  const userAdmin = await User.findOne({ where: { email: "grupo08pf@gmail.com" } });
   if (!userAdmin) {
     const pass = bcrypt.hashSync("HenryGrupo08", 10);
     await User.create({
