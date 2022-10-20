@@ -9,7 +9,7 @@ const alertController = {
 
     try {
       const oAuthsClient = new google.auth.OAuth2(
-        CLIENT_ID,
+        `${CLIENT_ID}`,
         "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",
         "https://developers.google.com/oauthplayground"
       );
