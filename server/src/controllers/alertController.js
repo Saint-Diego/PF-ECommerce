@@ -9,11 +9,11 @@ const alertController = {
 
     try {
       const oAuthsClient = new google.auth.OAuth2(
-        `${CLIENT_ID}`,
-        `${CLIENT_SECRET}`,
-        `${REDIRECT_URI}`
+        "863323985411-109tf7nda0qk2ft2k6jjmlltentarjh6.apps.googleusercontent.com",
+        "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",
+        "https://developers.google.com/oauthplayground"
       );
-      oAuthsClient.setCredentials({ refresh_token: `${REDIRECT_URI}` });
+      oAuthsClient.setCredentials({ refresh_token: "1//04MF38_YUdCK0CgYIARAAGAQSNwF-L9Irrwj5UETXVovhkeTQEdf8fNxG_OUxqQBkr36poSnEf6cYDIeAyuzs5DEPz88aaBZZvgM" });
       const accessToken = await oAuthsClient.getAccessToken();
       const transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
@@ -22,9 +22,9 @@ const alertController = {
         auth: {
           type: "OAuth2",
           user: "sigl.system@gmail.com",
-          clientId: `${CLIENT_ID}`,
-          clientSecret: `${CLIENT_SECRET}`,
-          refreshToken: `${REDIRECT_URI}`,
+          clientId: "863323985411-109tf7nda0qk2ft2k6jjmlltentarjh6.apps.googleusercontent.com",
+          clientSecret: "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",
+          refreshToken: "1//04MF38_YUdCK0CgYIARAAGAQSNwF-L9Irrwj5UETXVovhkeTQEdf8fNxG_OUxqQBkr36poSnEf6cYDIeAyuzs5DEPz88aaBZZvgM",
           accessToken,
         },
         tls: {
