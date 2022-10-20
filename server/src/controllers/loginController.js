@@ -170,7 +170,7 @@ const loginController = {
   putUser: async (req, res, next) => {  
     const { id } = req.params;// saco el id
     const modification = req.body; // los cambios que voy a realizar
-    
+    console.log("id de user", id);
     try {
       const errors = validationResult(req);
 
