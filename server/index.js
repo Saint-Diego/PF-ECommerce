@@ -16,7 +16,6 @@ conn.sync({ force: false }).then(async () => {
       password: pass,
       email: "grupo08pf@gmail.com",
       role: "ADMIN",
-      picture: "",
       secretWord: "admin",
     });
   }
