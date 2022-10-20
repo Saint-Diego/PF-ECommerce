@@ -160,59 +160,61 @@ const loginController = {
     const modification = req.body;
     //console.log(modification);
     try {
-      const data = await User.findByPk(id)
-      const user = await User.update(modification, {
-        where: {
-          id: id,
-        },
-      });
-     return res.json(data);
+      await User.update(modification, { where: { id } });
+      const data = await User.findByPk(id);
+      return res.json(data);
     } catch (error) {
-     console.log(error) 
+      console.log(error) 
     };
   },
-  putUser: async (req, res, next) => {
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-      return res.status(400).json(errors);
-    }
-
-    // req.body.password= bcrypt.hashSync(req.body.password, 10);
-    
-    const { id } = req.params; // saco el id
+  putUser: async (req, res, next) => {  
+    const { id } = req.params.id ? ; req.params.id : req.params.idUser// saco el id
     const modification = req.body; // los cambios que voy a realizar
-    const user = await thereIsEmail(req.body.email);
+    
+    try {
+      const errors = validationResult(req);
 
-    const change = await models.User.update(modification, {
-      where: {
-        id: id,
-      },
-    });
-
-    if (change) {
-      await axios.post("https://pf-ecommerce-production-3652.up.railway.app/alert/email", {
-        emails: change.email,
-        subject: "Actualización exitosa",
-        content: {
-          body: `
-          <h3>Actualización de usuario</h3>
-          <p>Sr. ${
-            user.name + " " + user.lastName
-          }, le informamos que su cuenta fue actualizada correctamente. Lo invitamos a que se dirija a nuestra página para que continúe con el proceso de inicio de sesión y mire las opciones de libros que tenemos disponibles.</p>
-          `,
-          footer: `
-          <a href="https://don-quijote.vercel.app/login" target="blanck">Iniciar sesión</a>
-          `
-        },
+      if (!errors.isEmpty()) {
+        return res.status(400).json(errors);
+      }
+      
+      //let password = bcrypt.hashSync(req.body.password, 10);
+      
+      //const user = await thereIsEmail(req.body.email);
+      //if (!user) {
+      //  return res.status(404).json({mesg: "User not found!"});
+      //}
+      const user = await User.findByPk(id);
+      if (!user) {
+        return res.status(400).send({mesg: "User not found!"});
+      }
+      await User.update(modification, { where: { id } });
+      
+      await axios.post(
+        "https://pf-ecommerce-production-3652.up.railway.app/alert/email",
+        {
+          emails: user.email,
+          subject: "Actualización exitosa",
+          content: {
+            body: `
+              <h3>Actualización de usuario</h3>
+              <p>Sr. ${
+                user.name + " " + user.lastName
+              }, le informamos que su cuenta fue actualizada correctamente. Lo invitamos a que se dirija a nuestra página para que continúe con el proceso de inicio de sesión y mire las opciones de libros que tenemos disponibles.</p>
+              `,
+            footer: `
+              <a href="https://don-quijote.vercel.app/login" target="blanck">Iniciar sesión</a>
+              `,
+          },
+        }
+      );
+      return res.json({
+        mesg: "User updated",
+        data: user,
       });
-    };
-
-    const data = await models.User.findByPk(id);
-    return res.json({
-      mesg: "User updated",
-      data: data,
-    });
+    } catch (error) {
+      return res.status(400).json({messg: "Error update user"});
+    }
   },
   getAllUsers: async (req, res, next) => {
     const p1 = models.User.findAndCountAll({
