@@ -180,14 +180,11 @@ const loginController = {
       
       //let password = bcrypt.hashSync(req.body.password, 10);
       
-      //const user = await thereIsEmail(req.body.email);
-      //if (!user) {
-      //  return res.status(404).json({mesg: "User not found!"});
-      //}
-      const user = await User.findByPk(id);
+      const user = await thereIsEmail(req.body.email);
       if (!user) {
-        return res.status(400).send({mesg: "User not found!"});
+        return res.status(404).json({mesg: "User not found!"});
       }
+      
       await User.update(modification, { where: { id } });
       
       await axios.post(
@@ -208,9 +205,10 @@ const loginController = {
           },
         }
       );
+      const userUpdate = await User.findByPk(id);
       return res.json({
         mesg: "User updated",
-        data: user,
+        data: userUpdate,
       });
     } catch (error) {
       return res.status(400).json({messg: "Error update user"});
