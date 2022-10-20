@@ -179,24 +179,26 @@ const loginController = {
       }
       
       //let password = bcrypt.hashSync(req.body.password, 10);
-      
-      const user = await thereIsEmail(req.body.email);
-      if (!user) {
-        return res.status(404).json({mesg: "User not found!"});
+      if (!req.body.isActive) {
+        const user = await thereIsEmail(req.body.email);
+        if (!user) {
+          return res.status(404).json({mesg: "User not found!"});
+        }
       }
       
       await User.update(modification, { where: { id } });
+      const userUpdate = await User.findByPk(id);
       
       await axios.post(
         "https://pf-ecommerce-production-3652.up.railway.app/alert/email",
         {
-          emails: user.email,
+          emails: userUpdate.email,
           subject: "Actualización exitosa",
           content: {
             body: `
               <h3>Actualización de usuario</h3>
               <p>Sr. ${
-                user.name + " " + user.lastName
+                userUpdate.name + " " + userUpdate.lastName
               }, le informamos que su cuenta fue actualizada correctamente. Lo invitamos a que se dirija a nuestra página para que continúe con el proceso de inicio de sesión y mire las opciones de libros que tenemos disponibles.</p>
               `,
             footer: `
@@ -205,7 +207,6 @@ const loginController = {
           },
         }
       );
-      const userUpdate = await User.findByPk(id);
       return res.json({
         mesg: "User updated",
         data: userUpdate,
